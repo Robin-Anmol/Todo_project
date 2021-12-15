@@ -106,6 +106,7 @@ submit_btn.addEventListener("click", function (e) {
 
 /*===================={Ishi_Special}=====================*/
 
+/*===================={sort function}=================*/
 /// not working properly
 
 // sort_todo.addEventListener("click", function (e) {
