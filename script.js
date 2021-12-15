@@ -12,29 +12,29 @@ function creatingTodoTask(task_value) {
   const task_element = document.createElement("div");
   task_element.classList.add("task");
 
-  /*===================={content div inside task div}=====================*/
+
 
   const task_content_element = document.createElement("div");
   task_content_element.classList.add("content");
 
-  /*===================={input field in content div checkbox}=====================*/
+
   const task_input_checkbox = document.createElement("input");
   task_input_checkbox.classList.add("checkbox");
   task_input_checkbox.type = "checkbox";
 
-  /*===================={input field for text in content div}=====================*/
+
   const task_input_text = document.createElement("input");
   task_input_text.classList.add("text");
   task_input_text.type = "text";
   task_input_text.value = task_value;
   task_input_text.setAttribute("readonly", "readonly");
 
-  /*===================={actions div inside task div }=====================*/
+
 
   const task_action_element = document.createElement("div");
   task_action_element.classList.add("actions");
 
-  /*===================={buttons for edit  or save qand delete in action div}=====================*/
+  
   const task_edit_btn = document.createElement("button");
   task_edit_btn.classList.add("edit");
   task_edit_btn.innerText = "Edit";
@@ -43,15 +43,14 @@ function creatingTodoTask(task_value) {
   task_delete_btn.classList.add("delete");
   task_delete_btn.innerText = "Delete";
 
-  /*===================={appending checkbox and task_text_element  in content div}=====================*/
+ 
   task_content_element.appendChild(task_input_checkbox);
   task_content_element.appendChild(task_input_text);
 
-  /*===================={appending delete and edit btn in action div}=====================*/
   task_action_element.appendChild(task_edit_btn);
   task_action_element.appendChild(task_delete_btn);
 
-  /*===================={appending content and action div in tasks div }=====================*/
+
   task_element.appendChild(task_content_element);
   task_element.appendChild(task_action_element);
 
@@ -104,7 +103,7 @@ submit_btn.addEventListener("click", function (e) {
   input_task.value = "";
 });
 
-/*===================={Ishi_Special}=====================*/
+
 
 /*===================={sort function}=================*/
 /// not working properly
