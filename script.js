@@ -105,25 +105,30 @@ submit_btn.addEventListener("click", function (e) {
 
 
 
-/*===================={sort function}=================*/
-/// not working properly
-
-// sort_todo.addEventListener("click", function (e) {
-//   // let clickOutput = sort_todo.;
-//   // console.log(clickOutput)
-// const todo_array = tasks.children;
-// const todo_secure = tasks.children;
-// let Todo_length = todo_array.length;
-// console.log(Todo_length);
-// for (let i = 0; i < Todo_length; i++) {
-//   const class_test = todo_array[i].classList.contains("task_opacity");
-//   if (!class_test && clickOutput === "completed") {
-//     todo_array[i].style.display = "none";
-//   } else if (class_test && clickOutput === "uncompleted") {
-//     todo_secure[i].style.display = "none";
-//   }
-// }
-// });
+/*===================={sort  addEventListener }=================*/
+sort_todo.addEventListener("click", function (e) {
+  const value = e.target.value;
+  // console.log(value);
+  const todo_array = tasks.children;
+  // console.log(todo_array);
+  let Todo_length = todo_array.length;
+  // console.log(Todo_length);
+  for (let i = 0; i < Todo_length; i++) {
+    const class_test = todo_array[i].classList.contains("task_opacity");
+    if (value == "All") {
+      todo_array[i].style.display = "flex";
+    } else if (value == "completed") {
+      if (class_test) {
+        todo_array[i].style.display = "flex";
+      } else todo_array[i].style.display = "none";
+    } else {
+      if (class_test) {
+        todo_array[i].style.display = "none";
+        // console.log(todo_array);
+      } else todo_array[i].style.display = "flex";
+    }
+  }
+});
 
 /*===================={add to local storage }=====================*/
 
