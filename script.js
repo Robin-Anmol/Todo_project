@@ -4,24 +4,19 @@ const input_task = document.querySelector("#new-task-input");
 const submit_btn = document.querySelector("#new-task-submit");
 const tasks = document.querySelector("#tasks");
 const sort_todo = document.querySelector("#sort_todo");
-
+const array = [];
 /*===================={create element function }=====================*/
 
 function creatingTodoTask(task_value) {
-  /*===================={task div}=====================*/
   const task_element = document.createElement("div");
   task_element.classList.add("task");
-
-
 
   const task_content_element = document.createElement("div");
   task_content_element.classList.add("content");
 
-
   const task_input_checkbox = document.createElement("input");
   task_input_checkbox.classList.add("checkbox");
   task_input_checkbox.type = "checkbox";
-
 
   const task_input_text = document.createElement("input");
   task_input_text.classList.add("text");
@@ -29,12 +24,9 @@ function creatingTodoTask(task_value) {
   task_input_text.value = task_value;
   task_input_text.setAttribute("readonly", "readonly");
 
-
-
   const task_action_element = document.createElement("div");
   task_action_element.classList.add("actions");
 
-  
   const task_edit_btn = document.createElement("button");
   task_edit_btn.classList.add("edit");
   task_edit_btn.innerText = "Edit";
@@ -43,13 +35,11 @@ function creatingTodoTask(task_value) {
   task_delete_btn.classList.add("delete");
   task_delete_btn.innerText = "Delete";
 
- 
   task_content_element.appendChild(task_input_checkbox);
   task_content_element.appendChild(task_input_text);
 
   task_action_element.appendChild(task_edit_btn);
   task_action_element.appendChild(task_delete_btn);
-
 
   task_element.appendChild(task_content_element);
   task_element.appendChild(task_action_element);
@@ -60,6 +50,11 @@ function creatingTodoTask(task_value) {
   const edit_btn = task_element.querySelector(".edit");
 
   const check_btn = task_element.querySelector(".checkbox");
+
+  /*===================={insert array element to localStorage}}=====================*/
+
+  array.push(task_value);
+  addToLocalStorage(array);
 
   /*===================={ addEventlistener for checkbox for completed or uncomplete task }=====================*/
   check_btn.addEventListener("click", function () {
@@ -73,6 +68,10 @@ function creatingTodoTask(task_value) {
   /*===================={addEventListener for deleting task}=====================*/
   delete_btn.addEventListener("click", function () {
     tasks.removeChild(task_element);
+    const index = array.indexOf(task_value);
+    // console.log(index);
+    array.splice(index, 1);
+    addToLocalStorage(array);
   });
 
   /*===================={addEventListener for edit and save task }=====================*/
@@ -87,9 +86,14 @@ function creatingTodoTask(task_value) {
       task_input_text.removeAttribute("readonly");
     } else {
       edit_btn.innerText = "EDIT";
+      const indexVaule = array.indexOf(task_value);
+      task_value = task_input_text.value;
+      array[indexVaule] = task_value;
+      addToLocalStorage(array);
       task_input_text.setAttribute("readonly", "readonly");
     }
   });
+  /*===================={}=====================*/
 }
 
 /*===================={adding task in todo}=====================*/
@@ -103,13 +107,14 @@ submit_btn.addEventListener("click", function (e) {
   input_task.value = "";
 });
 
+/*===================={sort addEventlistener }=====================*/
 
-
-/*===================={sort  addEventListener }=================*/
 sort_todo.addEventListener("click", function (e) {
   const value = e.target.value;
   // console.log(value);
   const todo_array = tasks.children;
+  console.log(todo_array);
+
   // console.log(todo_array);
   let Todo_length = todo_array.length;
   // console.log(Todo_length);
@@ -132,4 +137,16 @@ sort_todo.addEventListener("click", function (e) {
 
 /*===================={add to local storage }=====================*/
 
-// still left
+function addToLocalStorage(array) {
+  localStorage.setItem("task", JSON.stringify(array));
+}
+
+/*===================={get from local storage}=====================*/
+function getFromLocalStorage() {
+  let reference = JSON.parse(localStorage.getItem("task"));
+  reference.forEach((element) => {
+    creatingTodoTask(element);
+  });
+}
+
+getFromLocalStorage();
